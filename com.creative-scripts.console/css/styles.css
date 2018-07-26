@@ -16,14 +16,6 @@
     --buttonFocus: rgba(120, 120, 120, .5);
 }
 
-.flip{
-    -webkit-transform: scale(-1, 1);
-    transform: scale(-1, 1);
-}
-:root .flip {
-  -webkit-filter: none;
-          filter: none; }
-
 
 /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
 
@@ -262,13 +254,6 @@ button:focus {
 
 
 
-/*.dropdown-button::before{
-    font-family: fontcustom;
-    content: "\f13e";
-    display: inline-block;
-    padding-right: 3px;
-    vertical-align: middle;
-}*/
 
 .drop-angle-up {
     -webkit-animation: dropAngleUp 0.7s 1 ease;
@@ -367,13 +352,30 @@ button:focus {
 
 
 
-/* Let's get this party started */
-
 ::-webkit-scrollbar {
     width: 12px;
 }
 
+/*
+#evalCode::-webkit-scrollbar-button:vertical:end:increment { // Down
+    display: block;
+    background-image: url(../resources/icons/arrowDown.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 9px;
+    padding: 1px;
+    margin-top: 4px;
+    }
 
+#evalCode::-webkit-scrollbar-button:vertical:start:decrement { // Up
+    display: block;
+    background-image: url(../resources/icons/arrowUp.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 9px;
+    padding: 1px;
+}
+*/
 
 /* Track */
 
@@ -402,9 +404,17 @@ button:focus {
 */
 
 .console::-webkit-resizer {
-    background-color: var(--editTextBackground) !important;
-    height: 30px;
-    color: blue;
+    /*background-color: var(--editTextBackground) !important;*/
+    visibility: hidden;
+}
+
+.console::-webkit-scrollbar-button{
+    /*background-color: blue !important;*/
+}
+
+.console::-webkit-scrollbar-corner {
+    background-image: url(../resources/icons/ArrowDown.png));
+    background-repeat: no-repeat;
 }
 
 .anchorpoint {

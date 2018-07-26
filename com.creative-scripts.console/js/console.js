@@ -13,7 +13,8 @@ window.gVue = new Vue({
     }
 });
 
-log('hello')
+var fs = require('fs');
+
 var __log = function(message, style, __class, elementType, consoleID) {
     if (typeof message === 'undefined') {
         return;
@@ -289,7 +290,9 @@ try {
           contenteditable="true"
         ></div>
             <button @click="showInstructions = !showInstructions"><strong>Instructions</strong></button>
-            <button @click="consoleInputDiv.value = ''">Clear Code</button>
+            <button @click="openSnippet">Open</button>
+            <button @click="saveSnippet">Save</button>
+            <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
             <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
 
         <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
@@ -329,24 +332,25 @@ try {
                 if (result === 'undefined' || !result.length) {return; }
                 // Check if result is error
                 if (/^\S+Error/.test(result.substring(0, 20))) {
-                    isBug = /Bug:[^\n\r]+\u23b2\u23b3\u2a0b[^\n\r]+\u23b2\u23b3\u2a0b[^\n\r]*$/.exec(result);
+                    isBug = /QBug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
                     if (isBug) {
-                        beforeBugLine = result.replace(/Bug:[^\n\r]+[\n\r]*$/,'');
+                        beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/,'');
+                        // need to check this out of CJK
                         bugLine = result.substring(beforeBugLine.length);
-                        bugLineParts = bugLine.split(/\u23b2\u23b3\u2a0b/);
-                        __log(beforeBugLine, 'font-weight:600;color:red');
+                        bugLineParts = bugLine.split(/\u2a0b\u2a0b/);
+                        __log(beforeBugLine, 'font-weight:600;color:#ff8c8c;');
                         if(bugLineParts[0]){
-                            __log(bugLineParts[0], 'font-weight:600;color:red;', undefined, 'span');
+                            __log(bugLineParts[0], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
                         if(bugLineParts[1]){
-                            __log(bugLineParts[1], 'font-weight:600;color:red; background:cyan;', undefined, 'span');
+                            __log(bugLineParts[1], 'font-weight:800;color:rgb(0,0,0);background:rgb(255,217,217);padding:2px;border-radius:4px;', undefined, 'span');
                         }
                         if(bugLineParts[2]){
-                            __log(bugLineParts[2], 'font-weight:600;color:red;', undefined, 'span');
+                            __log(bugLineParts[2], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
 
                     } else {
-                        __log(result, 'font-weight:600;color:red');
+                        __log(result, 'font-weight:600;color:#ff8c8c');
                     }
                 } else {
                     __log(result, 'font-weight:600;');
@@ -354,6 +358,7 @@ try {
             },
             logEnter: function(key) {
                 var contents = this.code;
+                if (contents === null) { return;}
                 if (key.shiftKey) {
                     return;
                 }
@@ -377,6 +382,33 @@ try {
                 // __log(middle, 'background:orange', undefined, 'span');
                 // __log(after, 'background:pink', undefined, 'span');
                 jsx.evalscript(script, this.jsxResult);
+            },
+            openSnippet: function(){
+                var snippet;
+                snippet = window.cep.fs.showOpenDialog(false, false, 'Please select a Snippet');
+                snippet = '' + snippet.data[0];
+                if (snippet === '' || snippet === 'undefined' || snippet === 'null') {
+                    return;
+                }
+                var __this = this;
+                fs.readFile(snippet, function(error, result) {
+                    if (error) return __error('Open Snippet Error: ' + error, 'background:#FFFCAA');
+                    __log('Opened: ' + snippet, 'background:#FFFCAA');
+                    __this.consoleInputDiv.value = '' + result;
+                });
+            },
+            saveSnippet: function(){
+                var snippet;
+                snippet = window.cep.fs.showSaveDialogEx('Save Snippet');
+                snippet = '' + snippet.data;
+                if (snippet === '' || snippet === 'undefined' || snippet === 'null') {
+                    return;
+                }
+                var __this = this;
+                fs.writeFile(snippet, __this.consoleInputDiv.value, function(error) {
+                    if (error) return __log('Save Snippet Error: ' + error, 'background:#FFFCAA; color:red;');
+                    __log('Saved: ' + snippet, 'background:#FFFCAA');
+                });
             },
         }
     });

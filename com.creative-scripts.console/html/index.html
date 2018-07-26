@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>AiPen</title>
+    <title>Console</title>
     <meta charset="utf-8">
     <link id="appStyle" rel="stylesheet" href="../css/styles.css" />
     <!-- <link id="tailwind" rel="stylesheet" href="../css/tailwind.css" /> -->
@@ -25,6 +25,7 @@
     if (window.module) module = window.module;
     if (window.exports) exports = window.exports;
     if (window.require) require = window.require;
+    var exec = require('child_process').exec;
     </script>
     <script src="../js/libs/CSInterface.js"></script>
     <script src="../js/themeManager.js"></script>
@@ -43,7 +44,7 @@
         font-size: 9pt;"
         ><strong>Restart<br>Console</strong></span></a>
         <span class="button"
-        onclick="cep.util.openURLInDefaultBrowser('http://creative-scripts.com')"
+        onclick="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"
         style="padding: 4px;
         margin: 0px;
         color: #39F;
@@ -52,8 +53,6 @@
         font-size: 9pt;"
         ><strong>© Creative Scripts <span style="font-size: 8pt;"><br> Custom Scripts, Extensions and Apps</strong></span></span>
     </div>
-
-
     <div id="app">
     </div>
     <!-- <script src="../js/LogFactory.js"></script> -->

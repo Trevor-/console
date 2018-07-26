@@ -22,11 +22,13 @@
 // Contact me http://creative-scripts.com/contact for pricing and licensing     //
 // Don't remove these commented lines                                           //
 // For simple and effective calling of jsx from the js engine                   //
-// Version 2.1 last modified 1 June 18                                          //
+// Version 2.2 last modified 26 June 18                                          //
 //////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Change log:                                                                                           //
+// Version 2.2 [26 July 18]                                                                              //
+// Adds Marker for syntax errors so they can be handled by a log with a regex                            //
 // Version 2.1 [1 June 18]                                                                               //
 // Checks to see if host app is Adobe or not and sets up dummy function if not                           //
 // Version 2 [18 April 18]                                                                               //
@@ -487,7 +489,7 @@ var jsx;
                     "           ErrorMessage += '\\nLine: ' + line +",
                     "               '-> ' + ((sourceLine.length < 300) ? sourceLine : sourceLine.substring(0,300) + '...');",
                     "        }",
-                    "        if (e.start) {ErrorMessage += '\\nBug: ' + sourceLine.substring(0,e.start - 1) + '\u23b2\u23b3\u2a0b' + e.source.substring(e.start - 1, e.end) + '\u23b2\u23b3\u2a0b' + sourceLine.substring(e.end - 1, 300)}",
+                    "        if (e.start) {ErrorMessage += '\\nBug: ' + sourceLine.substring(0,e.start - 1) + '\u2a0b\u2a0b' + e.source.substring(e.start - 1, e.end) + '\u2a0b\u2a0b' + sourceLine.substring(e.end - 1, 300);}",
                     "        if ($.includeStack) {ErrorMessage += '\\nStack:' + $.stack;}",
                     "        return ErrorMessage;",
                     "    })(e);",
