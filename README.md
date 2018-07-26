@@ -10,7 +10,7 @@
 
 ### Comparison with CSTK ###
 * Console is a lot easier to use for ExtendedScript.
-* CSTK console is not as nice to use but there's a lot more features on the CSTK
+* CSTK console is not as nice to use but there's a lot more features on the CSTK see https://github.com/Trevor-/CSTK
 
 ### How do I get set up? ###
 
