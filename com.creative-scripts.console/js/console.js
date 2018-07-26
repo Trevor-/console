@@ -315,7 +315,7 @@ try {
                 focus: null,
                 id: null,
                 code: null,
-                commandAlt: navigator.platform[0]==='M' ? 'Option' : 'alt',
+                commandAlt: navigator.platform[0] === 'M' ? 'Option' : 'alt',
                 showInstructions: false
             };
         },
@@ -324,7 +324,31 @@ try {
                 this.focus = true;
             },
             jsxResult: function(result) {
-                if (result !== 'undefined') {
+                var isBug, beforeBugLine, bugLine, bugLineParts,
+                    beforeBug, bug, afterBug;
+                if (result === 'undefined' || !result.length) {return; }
+                // Check if result is error
+                if (/^\S+Error/.test(result.substring(0, 20))) {
+                    isBug = /Bug:[^\n\r]+\u23b2\u23b3\u2a0b[^\n\r]+\u23b2\u23b3\u2a0b[^\n\r]*$/.exec(result);
+                    if (isBug) {
+                        beforeBugLine = result.replace(/Bug:[^\n\r]+[\n\r]*$/,'');
+                        bugLine = result.substring(beforeBugLine.length);
+                        bugLineParts = bugLine.split(/\u23b2\u23b3\u2a0b/);
+                        __log(beforeBugLine, 'font-weight:600;color:red');
+                        if(bugLineParts[0]){
+                            __log(bugLineParts[0], 'font-weight:600;color:red;', undefined, 'span');
+                        }
+                        if(bugLineParts[1]){
+                            __log(bugLineParts[1], 'font-weight:600;color:red; background:cyan;', undefined, 'span');
+                        }
+                        if(bugLineParts[2]){
+                            __log(bugLineParts[2], 'font-weight:600;color:red;', undefined, 'span');
+                        }
+
+                    } else {
+                        __log(result, 'font-weight:600;color:red');
+                    }
+                } else {
                     __log(result, 'font-weight:600;');
                 }
             },

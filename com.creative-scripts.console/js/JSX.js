@@ -487,7 +487,7 @@ var jsx;
                     "           ErrorMessage += '\\nLine: ' + line +",
                     "               '-> ' + ((sourceLine.length < 300) ? sourceLine : sourceLine.substring(0,300) + '...');",
                     "        }",
-                    "        if (e.start) {ErrorMessage += '\\nBug: ' + sourceLine.substring(0,e.start - 1) + '***' + e.source.substring(e.start - 1, e.end) + '***' + sourceLine.substring(e.end - 1, 300)}",
+                    "        if (e.start) {ErrorMessage += '\\nBug: ' + sourceLine.substring(0,e.start - 1) + '\u23b2\u23b3\u2a0b' + e.source.substring(e.start - 1, e.end) + '\u23b2\u23b3\u2a0b' + sourceLine.substring(e.end - 1, 300)}",
                     "        if ($.includeStack) {ErrorMessage += '\\nStack:' + $.stack;}",
                     "        return ErrorMessage;",
                     "    })(e);",
