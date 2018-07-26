@@ -198,6 +198,10 @@ try {
                         "keyCode": 52
                     }, // Mac Enter
                     {
+                        "keyCode": 52,
+                        "metatKey": true
+                    }, // Mac Enter
+                    {
                         "keyCode": 76
                     }, // Mac Enter Number Pad
                     {
@@ -260,6 +264,7 @@ try {
             keydown.preventDefault();
             return false;
         }
+        // log(keydown)
     });
 
 
@@ -283,18 +288,19 @@ try {
           :id="'consoleOutput' + (id ? id : '')"
           contenteditable="true"
         ></div>
-        <div style="font-size: 9pt;text-align: left;">
-            <strong>Instructions</strong><br>
-            Code in top box, results in bottom box.<br>
-            <strong>Enter</strong> executes line.<br>
-            <strong>Command (alt) + Enter</strong> executes selected lines without inserting a line break.<br>
-            <strong>Shift + Enter</strong> inserts line break without executing code.<br>
-            <strong>Ctrl + Command (alt) + Enter</strong> executes entire console press.<br>
-            <strong>Drag bottom right corners of boxes to adjust their heights.</strong>
-        </div>
-        <div  style="font-size: 9pt;text-align: center;">
+            <button @click="showInstructions = !showInstructions"><strong>Instructions</strong></button>
             <button @click="consoleInputDiv.value = ''">Clear Code</button>
             <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
+
+        <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
+            Code in top box, results in bottom box.<br>
+            <strong>Enter</strong> executes line.<br>
+            <strong>{{commandAlt}} + Enter</strong> executes selected lines without inserting a line break.<br>
+            <strong>Shift + Enter</strong> inserts line break without executing code.<br>
+            <strong>Ctrl + {{commandAlt}} + Enter</strong> executes entire console press.<br>
+            <strong>Drag bottom right corners of boxes to adjust their heights.</strong>
+        </div>
+        <div  style="font-size: 8pt;text-align: center;">
         </div>
         </div>`,
         created: function() {
@@ -309,6 +315,8 @@ try {
                 focus: null,
                 id: null,
                 code: null,
+                commandAlt: navigator.platform[0]==='M' ? 'Option' : 'alt',
+                showInstructions: false
             };
         },
         methods: {
