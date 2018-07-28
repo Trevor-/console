@@ -289,9 +289,11 @@ try {
           :id="'consoleOutput' + (id ? id : '')"
           contenteditable="true"
         ></div>
-            <button @click="showInstructions = !showInstructions"><strong>Instructions</strong></button>
+            <button @click="executeCode(true)">Run</button>
+            <button @click="executeCode(false)">Run selected lines</button>
             <button @click="openSnippet">Open</button>
             <button @click="saveSnippet">Save</button>
+            <button @click="showInstructions = !showInstructions"><strong>{{showInstructions ? 'Hide Instructions' : 'Show Instructions' }}</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
             <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
 
@@ -366,8 +368,16 @@ try {
                     key.stopPropagation();
                     key.preventDefault();
                     if (key.ctrlKey) {
-                        return jsx.evalscript(contents, this.jsxResult);
+                        return this.executeCode(true); // true is to run whole snippet
                     }
+                }
+                 return this.executeCode(false); // false is to run selected lines only
+            },
+            executeCode: function(runWholeSnippet){
+                var contents = this.code;
+                if (contents === null) { return;}
+                if (runWholeSnippet){
+                    return jsx.evalscript(contents, this.jsxResult);
                 }
                 var div = this.consoleInputDiv;
                 var codeStart = div.selectionStart;
@@ -382,6 +392,7 @@ try {
                 // __log(middle, 'background:orange', undefined, 'span');
                 // __log(after, 'background:pink', undefined, 'span');
                 jsx.evalscript(script, this.jsxResult);
+
             },
             openSnippet: function(){
                 var snippet;
