@@ -1,0 +1,131 @@
+/*
+:root {
+    --mainColor: rgba(0,0,0,255);
+    --editTextBackground: rgba(227,227,227,255);
+    --editTextColor: rgba(35,35,35,255);
+    --tooltipBackground: rgba(73,73,73,255);
+    --tooltipColor: rgba(176,176,176,255);
+    --tooltipBoxShadow: 1px 1px 4px 0px rgba(51,51,51,0.75);
+    --editTextBorderColor: rgba(168,168,168,255);
+    --buttonHoverBackground: rgba(196,196,196,255);
+    --buttonHoverColor: #fff;
+    --buttonActiveBackground: rgba(71,71,71,255);
+    --dropdownHover:  rgba(100,100,100,0);
+    --dropdownSelected: #666666;
+    --scrollbarThumb: rgba(193, 192, 192, 0.6);
+    --buttonFocus: rgba(120, 120, 120, .5);
+    --inputFocus: #46A0F5;
+}
+*/
+
+body, .panel {
+    /*background-color: var(--mainBackground); /* mainBackground */*/
+    color: rgba(0,0,0,255); /* mainColor */
+}
+
+.editText {
+    background-color: rgba(227,227,227,255); /* editTextBackground */
+    color: rgba(35,35,35,255); /* editTextColor */
+}
+
+
+.tooltip {
+    background-color: rgba(73,73,73,255); /* tooltipBackground */
+    color: rgba(176,176,176,255); /* tooltipColor */
+    box-shadow: 1px 1px 4px 0px rgba(51,51,51,0.75); /* tooltipBoxShadow */
+}
+
+input[type="text"] {
+    background-color: rgba(227,227,227,255); /* editTextBackground */
+    border-color: rgba(168,168,168,255); /* editTextBorderColor */
+    color: rgba(35,35,35,255); /* editTextColor */
+}
+
+input[type="text"]:focus {
+    border-color: #46A0F5; /* inputFocus */
+}
+
+button, .button {
+    background-color: rgba(100,100,100,0); /* transparent will show mainBackground */
+    border-color: rgba(168,168,168,255); /* editTextBorderColor */
+    color: rgba(0,0,0,255); /* mainColor */
+}
+
+button:hover {
+    background-color: rgba(196,196,196,255); /* buttonHoverBackground */
+    color: #fff; /* buttonHoverColor */
+}
+
+button:active {
+    background-color: rgba(71,71,71,255); /* buttonActiveBackground */
+    border-color: rgba(71,71,71,255); /* buttonActiveBackground */
+}
+
+button:focus {
+    border-color: #46A0F5; /* inputFocus */
+    background-color: var(--buttonFocus); /* buttonFocus */
+}
+
+.buttonSelected {
+    background-color: var(--buttonFocus); /* buttonFocus */
+}
+
+
+.buttonDisabled {
+    background-color: pink;
+}
+
+.dropdown-input-div {
+    background: rgba(227,227,227,255); /* editTextBackground */
+    border: 1px solid rgba(168,168,168,255); /* editTextBorderColor */
+}
+
+.dropdown-div {
+    background: rgba(227,227,227,255); /* editTextBackground */
+    border: 1px solid rgba(168,168,168,255); /* editTextBorderColor */
+}
+
+
+.dropdown-item:hover {
+    background:  rgba(100,100,100,0); /* dropdownHover */
+}
+
+
+.dropdown-button-middle {
+    background-color: rgba(227,227,227,255); /* editTextBackground */
+    border-color: rgba(168,168,168,255); /* editTextBorderColor */
+}
+
+
+.dropdown-select {
+    background:  rgba(100,100,100,0); /* dropdownHover */
+}
+
+.dropdown-selected {
+    color: #46A0F5; /* inputFocus */
+}
+
+.console {
+    background-color: rgba(227,227,227,255); /* editTextBackground */
+    border-color: rgba(168,168,168,255); /* editTextBorderColor */
+    color: rgba(35,35,35,255); /* editTextColor */
+}
+
+.consoleResizer {
+    box-shadow: 0px -1px 0px 0px rgba(168,168,168,255); /* editTextBorderColor */
+}
+
+
+
+::-webkit-scrollbar-thumb {
+    background: rgba(193, 192, 192, 0.6); /* scrollbarThumb */
+}
+
+.selectDropdow{
+    background-color: rgba(227,227,227,255); /* editTextBackground */
+    color: rgba(35,35,35,255); /* editTextColor */
+    border-color: rgba(168,168,168,255); /* editTextBorderColor */
+}
+.selectDropdow:focus{
+    border-color: #46A0F5; /* inputFocus */
+}
