@@ -1,20 +1,21 @@
 /*
 :root {
-    --mainColor: rgba(0,0,0,255);
-    --editTextBackground: rgba(227,227,227,255);
-    --editTextColor: rgba(35,35,35,255);
-    --tooltipBackground: rgba(73,73,73,255);
-    --tooltipColor: rgba(176,176,176,255);
-    --tooltipBoxShadow: 1px 1px 4px 0px rgba(51,51,51,0.75);
-    --editTextBorderColor: rgba(168,168,168,255);
-    --buttonHoverBackground: rgba(196,196,196,255);
+    --mainColor: #000;
+    --editTextBackground: #E3E3E3;
+    --editTextColor: #232323;
+    --tooltipBackground: #494949;
+    --tooltipColor: #B0B0B0;
+    --tooltipBoxShadow: 1px 1px 4px 0px #545454;
+    --editTextBorderColor: #A8A8A8;
+    --buttonHoverBackground: #C4C4C4;
     --buttonHoverColor: #fff;
-    --buttonActiveBackground: rgba(71,71,71,255);
+    --buttonActiveBackground: #474747;
     --dropdownHover:  rgba(100,100,100,0);
     --dropdownSelected: #666666;
-    --scrollbarThumb: rgba(193, 192, 192, 0.6);
-    --buttonFocus: rgba(120, 120, 120, .5);
+    --scrollbarThumb: #cecece;
+    --buttonFocus: #989898;
     --inputFocus: #46A0F5;
+    --mainBackground: #b8b8b8;
 }
 */
 
