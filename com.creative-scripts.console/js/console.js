@@ -13,7 +13,6 @@ window.gVue = new Vue({
     }
 });
 
-var fs = require('fs');
 
 var __log = function(message, style, __class, elementType, consoleID) {
     if (typeof message === 'undefined') {
@@ -331,23 +330,23 @@ try {
             jsxResult: function(result) {
                 var isBug, beforeBugLine, bugLine, bugLineParts,
                     beforeBug, bug, afterBug;
-                if (result === 'undefined' || !result.length) {return; }
+                if (result === 'undefined' || !result.length) { return; }
                 // Check if result is error
                 if (/^\S+Error/.test(result.substring(0, 20))) {
                     isBug = /QBug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
                     if (isBug) {
-                        beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/,'');
+                        beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/, '');
                         // need to check this out of CJK
                         bugLine = result.substring(beforeBugLine.length);
                         bugLineParts = bugLine.split(/\u2a0b\u2a0b/);
                         __log(beforeBugLine, 'font-weight:600;color:#ff8c8c;');
-                        if(bugLineParts[0]){
+                        if (bugLineParts[0]) {
                             __log(bugLineParts[0], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
-                        if(bugLineParts[1]){
+                        if (bugLineParts[1]) {
                             __log(bugLineParts[1], 'font-weight:800;color:rgb(0,0,0);background:rgb(255,217,217);padding:2px;border-radius:4px;', undefined, 'span');
                         }
-                        if(bugLineParts[2]){
+                        if (bugLineParts[2]) {
                             __log(bugLineParts[2], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
 
@@ -360,7 +359,7 @@ try {
             },
             logEnter: function(key) {
                 var contents = this.code;
-                if (contents === null) { return;}
+                if (contents === null) { return; }
                 if (key.shiftKey) {
                     return;
                 }
@@ -371,12 +370,12 @@ try {
                         return this.executeCode(true); // true is to run whole snippet
                     }
                 }
-                 return this.executeCode(false); // false is to run selected lines only
+                return this.executeCode(false); // false is to run selected lines only
             },
-            executeCode: function(runWholeSnippet){
+            executeCode: function(runWholeSnippet) {
                 var contents = this.code;
-                if (contents === null) { return;}
-                if (runWholeSnippet){
+                if (contents === null) { return; }
+                if (runWholeSnippet) {
                     return jsx.evalscript(contents, this.jsxResult);
                 }
                 var div = this.consoleInputDiv;
@@ -394,8 +393,9 @@ try {
                 jsx.evalscript(script, this.jsxResult);
 
             },
-            openSnippet: function(){
+            openSnippet: function() {
                 var snippet;
+                var fs = require('fs');
                 snippet = window.cep.fs.showOpenDialog(false, false, 'Please select a Snippet');
                 snippet = '' + snippet.data[0];
                 if (snippet === '' || snippet === 'undefined' || snippet === 'null') {
@@ -408,8 +408,9 @@ try {
                     __this.consoleInputDiv.value = '' + result;
                 });
             },
-            saveSnippet: function(){
+            saveSnippet: function() {
                 var snippet;
+                var fs = require('fs');
                 snippet = window.cep.fs.showSaveDialogEx('Save Snippet');
                 snippet = '' + snippet.data;
                 if (snippet === '' || snippet === 'undefined' || snippet === 'null') {

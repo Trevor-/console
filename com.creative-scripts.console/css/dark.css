@@ -10,7 +10,7 @@
     --buttonHoverBackground: rgba(196,196,196,255);
     --buttonHoverColor: #000;
     --buttonActiveBackground: rgba(89,89,89,255);
-    --dropdownHover: var(--mainBackground);
+    --dropdownHover: rgba(100,100,100,0);
     --dropdownSelected: #666666;
     --scrollbarThumb: rgba(193, 192, 192, 0.6);
     --buttonFocus: rgba(120, 120, 120, .5);
@@ -19,26 +19,25 @@
 */
 
 body, .panel {
-    background-color: var(--mainBackground); /* mainBackground */
-    color: var(--mainColor); /* mainColor */
+    color: rgba(225,225,225,255); /* mainColor */
 }
 
 .editText {
-    background-color: var(--editTextBackground); /* editTextBackground */
-    color: var(--editTextColor); /* editTextColor */
+    background-color: rgba(69,69,69,255); /* editTextBackground */
+    color: rgba(250,250,250,255); /* editTextColor */
 }
 
 
 .tooltip {
-    background-color: var(--tooltipBackground); /* tooltipBackground */
-    color: var(--tooltipColor); /* tooltipColor */
-    box-shadow: var(--tooltipBoxShadow); /* tooltipBoxShadow */
+    background-color: rgba(200,200,200,255); /* tooltipBackground */
+    color: rgba(89,89,89,255); /* tooltipColor */
+    box-shadow: 1px 1px 4px 0px rgba(51,51,51,0.75); /* tooltipBoxShadow */
 }
 
 input[type="text"] {
-    background-color: var(--editTextBackground); /* editTextBackground */
-    border-color: var(--editTextBorderColor); /* editTextBorderColor */
-    color: var(--editTextColor); /* editTextColor */
+    background-color: rgba(69,69,69,255); /* editTextBackground */
+    border-color: rgba(97,97,97,255); /* editTextBorderColor */
+    color: rgba(250,250,250,255); /* editTextColor */
 }
 
 input[type="text"]:focus {
@@ -47,27 +46,27 @@ input[type="text"]:focus {
 
 button, .button {
     background-color: rgba(100,100,100,0); /* transparent will show mainBackground */
-    border-color: var(--editTextBorderColor); /* editTextBorderColor */
-    color: var(--mainColor); /* mainColor */
+    border-color: rgba(97,97,97,255); /* editTextBorderColor */
+    color: rgba(225,225,225,255); /* mainColor */
 }
 
 button:hover {
-    background-color: var(--buttonHoverBackground); /* buttonHoverBackground */
-    color: var(--buttonHoverColor); /* buttonHoverColor */
+    background-color: rgba(196,196,196,255); /* buttonHoverBackground */
+    color: #000; /* buttonHoverColor */
 }
 
 button:active {
-    background-color: var(--buttonActiveBackground); /* buttonActiveBackground */
-    border-color: var(--buttonActiveBackground); /* buttonActiveBackground */
+    background-color: rgba(89,89,89,255); /* buttonActiveBackground */
+    border-color: rgba(89,89,89,255); /* buttonActiveBackground */
 }
 
 button:focus {
     border-color: #46A0F5; /* inputFocus */
-    background-color: var(--buttonFocus); /* buttonFocus */
+    background-color: rgba(120, 120, 120, .5); /* buttonFocus */
 }
 
 .buttonSelected {
-    background-color: var(--buttonFocus); /* buttonFocus */
+    background-color: rgba(120, 120, 120, .5); /* buttonFocus */
 }
 
 
@@ -76,29 +75,29 @@ button:focus {
 }
 
 .dropdown-input-div {
-    background: var(--editTextBackground); /* editTextBackground */
-    border: 1px solid var(--editTextBorderColor); /* editTextBorderColor */
+    background: rgba(69,69,69,255); /* editTextBackground */
+    border: 1px solid rgba(97,97,97,255); /* editTextBorderColor */
 }
 
 .dropdown-div {
-    background: var(--editTextBackground); /* editTextBackground */
-    border: 1px solid var(--editTextBorderColor); /* editTextBorderColor */
+    background: rgba(69,69,69,255); /* editTextBackground */
+    border: 1px solid rgba(97,97,97,255); /* editTextBorderColor */
 }
 
 
 .dropdown-item:hover {
-    background: var(--dropdownHover); /* dropdownHover */
+    background: rgba(100,100,100,0); /* dropdownHover */
 }
 
 
 .dropdown-button-middle {
-    background-color: var(--editTextBackground); /* editTextBackground */
-    border-color: var(--editTextBorderColor); /* editTextBorderColor */
+    background-color: rgba(69,69,69,255); /* editTextBackground */
+    border-color: rgba(97,97,97,255); /* editTextBorderColor */
 }
 
 
 .dropdown-select {
-    background: var(--dropdownHover); /* dropdownHover */
+    background: rgba(100,100,100,0); /* dropdownHover */
 }
 
 .dropdown-selected {
@@ -106,25 +105,25 @@ button:focus {
 }
 
 .console {
-    background-color: var(--editTextBackground); /* editTextBackground */
-    border-color: var(--editTextBorderColor); /* editTextBorderColor */
-    color: var(--editTextColor); /* editTextColor */
+    background-color: rgba(69,69,69,255); /* editTextBackground */
+    border-color: rgba(97,97,97,255); /* editTextBorderColor */
+    color: rgba(250,250,250,255); /* editTextColor */
 }
 
 .consoleResizer {
-    box-shadow: 0px -1px 0px 0px var(--editTextBorderColor); /* editTextBorderColor */
+    box-shadow: 0px -1px 0px 0px rgba(97,97,97,255); /* editTextBorderColor */
 }
 
 
 
 ::-webkit-scrollbar-thumb {
-    background: var(--scrollbarThumb); /* scrollbarThumb */
+    background: rgba(193, 192, 192, 0.6); /* scrollbarThumb */
 }
 
 .selectDropdow{
-    background-color: var(--editTextBackground); /* editTextBackground */
-    color: var(--editTextColor); /* editTextColor */
-    border-color: var(--editTextBorderColor); /* editTextBorderColor */
+    background-color: rgba(69,69,69,255); /* editTextBackground */
+    color: rgba(250,250,250,255); /* editTextColor */
+    border-color: rgba(97,97,97,255); /* editTextBorderColor */
 }
 .selectDropdow:focus{
     border-color: #46A0F5; /* inputFocus */

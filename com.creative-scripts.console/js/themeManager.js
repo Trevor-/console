@@ -8,11 +8,14 @@
     settings as defined by the end user.
 
 */
+
+try{
 var themeManager = (function() {
     'use strict';
 
     /**
      * Convert the Color object to string in hexadecimal format;
+     * This is needed for the older app 2015 needs 2018 does not
      */
     function toHex(color, delta) {
 
@@ -34,115 +37,21 @@ var themeManager = (function() {
         if (color) {
             hex = computeValue(color.red, delta) + computeValue(color.green, delta) + computeValue(color.blue, delta);
         }
-        return hex;
+        return '#' + hex;
     }
 
+    var stylesheet = document.getElementById("theme");
 
-    var stylesheet = document.getElementById("hostStyle");
-    if (stylesheet) {
-        stylesheet = stylesheet.sheet;
-    }
-
-    function addRule(selector, rule) {
-        if (stylesheet) {
-            if (stylesheet.addRule) {
-                stylesheet.addRule(selector, rule);
-            } else if (stylesheet.insertRule) {
-                stylesheet.insertRule(selector + ' { ' + rule + ' }', stylesheet.cssRules.length);
-            }
-        }
-    }
     var theme, getTheme;
 
     getTheme = function(skinInfo) {
         var red, themes;
         themes = ['lightLight', 'light', 'dark', 'darkDark'];
         red = skinInfo.panelBackgroundColor.color.red;
-        if (red > 200) { return 'lightLight'; }
-        if (red > 122) { return 'light'; }
-        if (red > 60) { return 'dark'; }
-        return 'darkDark';
-    };
-
-    theme = {
-        lightLight: {
-            mainColor: "rgba(56,56,56,255)",
-            editTextBackground: "rgba(255,255,255,255)",
-            editTextColor: "rgba(56,56,56,255)",
-            tooltipBackground: "rgba(109,109,109,255)",
-            tooltipColor: "rgba(229,229,229,255)",
-            tooltipBoxShadow: "1px 1px 4px 0px rgba(51,51,51,0.75)",
-            editTextBorderColor: "rgba(220,220,220,255)",
-            buttonHoverBackground: "rgba(189,189,189,255)",
-            buttonHoverColor: "#fff",
-            buttonActiveBackground: "rgba(189,189,189,255)",
-            dropdownHover: "#ddd",
-            // dropdownHover: "var(--mainBackground)",
-            dropdownSelected: "#666666",
-            scrollbarThumb: "#fff",
-        },
-        light: {
-            mainColor: "rgba(0,0,0,255)",
-            editTextBackground: "rgba(227,227,227,255)",
-            editTextColor: "rgba(35,35,35,255)",
-            tooltipBackground: "rgba(73,73,73,255)",
-            tooltipColor: "rgba(176,176,176,255)",
-            tooltipBoxShadow: "1px 1px 4px 0px rgba(51,51,51,0.75)",
-            editTextBorderColor: "rgba(168,168,168,255)",
-            buttonHoverBackground: "rgba(196,196,196,255)",
-            buttonHoverColor: "#fff",
-            buttonActiveBackground: "rgba(71,71,71,255)",
-            // dropdownHover: "#bbb",
-            dropdownHover: "var(--mainBackground)",
-            dropdownSelected: "#666666",
-            scrollbarThumb: "rgba(193, 192, 192, 0.6)",
-        },
-        dark: {
-            mainColor: "rgba(225,225,225,255)",
-            editTextBackground: "rgba(69,69,69,255)",
-            editTextColor: "rgba(250,250,250,255)",
-            tooltipBackground: "rgba(200,200,200,255)",
-            tooltipColor: "rgba(89,89,89,255)",
-            tooltipBoxShadow: "1px 1px 4px 0px rgba(51,51,51,0.75)",
-            editTextBorderColor: "rgba(97,97,97,255)",
-            buttonHoverBackground: "rgba(196,196,196,255)",
-            buttonHoverColor: "#000",
-            buttonActiveBackground: "rgba(89,89,89,255)",
-            // dropdownHover: "#555",
-            dropdownHover: "var(--mainBackground)",
-            dropdownSelected: "#666666",
-            scrollbarThumb: "rgba(193, 192, 192, 0.6)",
-        },
-            darkDark: {
-            mainColor: "rgba(214,214,214,255)",
-            editTextBackground: "rgba(38,38,38,255)",
-            editTextColor: "rgba(202,202,202,255)",
-            tooltipBackground: "rgba(153,153,153,255)",
-            tooltipColor: "rgba(57,57,57,255)",
-            tooltipBoxShadow: "1px 1px 4px 0px rgba(51,51,51,0.75)",
-            editTextBorderColor: "rgba(62,62,62,255)",
-            buttonHoverBackground: "rgba(196,196,196,255)",
-            buttonHoverColor: "#000",
-            buttonActiveBackground: "rgba(177,177,177,255)",
-            dropdownHover: "#444",
-            // dropdownHover: "var(--mainBackground)",
-            dropdownSelected: "#666666",
-            scrollbarThumb: "rgba(193, 192, 192, 0.6)",
-        }
-    };
-
-    var hostToRgba = function(_var, color) {
-        color = color.color;
-        document.documentElement.style.setProperty(_var, `rgba(${color.red},${color.green},${color.blue},${color.alpha})`);
-    };
-
-    var setVars = function(theme) {
-        var _var;
-        for (_var in theme) {
-            if (theme.hasOwnProperty(_var)) {
-                document.documentElement.style.setProperty('--' + _var, theme[_var]);
-            }
-        }
+        if (red > 200) { return '../css/lightLight.css'; }
+        if (red > 122) { return '../css/light.css'; }
+        if (red > 60) { return '../css/dark.css'; }
+        return '../css/darkDark.css';
     };
 
 
@@ -150,12 +59,17 @@ var themeManager = (function() {
      * Update the theme with the AppSkinInfo retrieved from the host product.
      */
     function updateThemeWithAppSkinInfo(appSkinInfo) {
-        if (!appSkinInfo) { return }
-
-        hostToRgba('--mainBackground', appSkinInfo.panelBackgroundColor);
-
-        setVars(theme[getTheme(appSkinInfo)]);
-
+        if (!appSkinInfo) { return; }
+        stylesheet.href = getTheme(appSkinInfo);
+        // console.log(appSkinInfo)
+        var background = appSkinInfo.panelBackgroundColor.color;
+        var colorString = toHex(background);
+        // var colorString = `rgba(${background.red},${background.green},${background.blue},${background.alpha})`;
+        console.log(colorString)
+        var elements = document.querySelectorAll('body, .panel');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.backgroundColor = colorString;
+        }
 
         ////////////////////////////////
         // Add you own css rules here //
@@ -183,3 +97,4 @@ var themeManager = (function() {
 }());
 
 themeManager.init();
+}catch(e){console.log(e.stack);}
