@@ -20,7 +20,7 @@
 */
 
 body, .panel {
-    /*background-color: var(--mainBackground); /* mainBackground */*/
+    background-color: #b8b8b8; /* mainBackground */
     color: rgba(0,0,0,255); /* mainColor */
 }
 

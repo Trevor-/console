@@ -76,18 +76,18 @@ button:focus {
 }
 
 .dropdown-input-div {
-    background: rgba(38,38,38,255); /* editTextBackground */
+    background-color: rgba(38,38,38,255); /* editTextBackground */
     border: 1px solid rgba(62,62,62,255); /* editTextBorderColor */
 }
 
 .dropdown-div {
-    background: rgba(38,38,38,255); /* editTextBackground */
+    background-color: rgba(38,38,38,255); /* editTextBackground */
     border: 1px solid rgba(62,62,62,255); /* editTextBorderColor */
 }
 
 
 .dropdown-item:hover {
-    background: #444; /* dropdownHover */
+    background-color: #444; /* dropdownHover */
 }
 
 
@@ -98,7 +98,7 @@ button:focus {
 
 
 .dropdown-select {
-    background: #444; /* dropdownHover */
+    background-color: #444; /* dropdownHover */
 }
 
 .dropdown-selected {
@@ -118,7 +118,7 @@ button:focus {
 
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(193, 192, 192, 0.6); /* scrollbarThumb */
+    background-color: rgba(193, 192, 192, 0.6); /* scrollbarThumb */
 }
 
 .selectDropdow{
