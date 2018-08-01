@@ -333,7 +333,7 @@ try {
                 if (result === 'undefined' || !result.length) { return; }
                 // Check if result is error
                 if (/^\S+Error/.test(result.substring(0, 20))) {
-                    isBug = /QBug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
+                    isBug = /Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
                     if (isBug) {
                         beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/, '');
                         // need to check this out of CJK
