@@ -390,6 +390,11 @@ try {
                 // __log(before, 'background:lightgreen', undefined, 'span');
                 // __log(middle, 'background:orange', undefined, 'span');
                 // __log(after, 'background:pink', undefined, 'span');
+                // allow for restarting the console by typing restartConsole! in the console
+                if(script === 'restartConsole!'){
+                    document.location.href = '../html/index.html';
+                    return;
+                }
                 jsx.evalscript(script, this.jsxResult);
 
             },
