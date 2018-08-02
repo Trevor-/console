@@ -323,7 +323,7 @@ var __sel, __doc;
         if (doc) { return doc; }
         throw new Error('Error: There are no open documents.');
     };
-    $.leek = $.leek || function(){
+    $.leak = $.leak || function(){
     var oldSummary, newSummary, summaryObject, diffObject, key, diffArrray, report, count, value;
     oldSummary = this.oldSummary || {};
     newSummary = $.summary();
@@ -356,7 +356,7 @@ var __sel, __doc;
         return 1;
     });
     count = diffArrray.length;
-    if(!count) {return 'No change from last $.leek()';}
+    if(!count) {return 'No change from last $.leak()';}
     report = diffArrray.join('\n').replace(/,/g, ': ');
     return count + ' memory change' + (count > 1 ? 's' : '') + '\n' + diffArrray.join('\n').replace(/,/g, ': ');
 };

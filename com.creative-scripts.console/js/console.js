@@ -13,6 +13,7 @@ window.gVue = new Vue({
     }
 });
 
+var exec = (typeof require !== 'undefined') ? require('child_process').exec : function(){window.open('http://www.creative-scripts.com', '_blank');};
 
 var __log = function(message, style, __class, elementType, consoleID) {
     if (typeof message === 'undefined') {
@@ -272,7 +273,8 @@ try {
     Vue.component('console', {
         props: ['id'],
         template: `
-        <div :id="id || 'console'">
+        <div :id="id || 'console'"
+         @keydown="console.log($event)">
         <textarea
                 :id="'evalCode' + (id ? id : '')"
                 ref="consoleInput"
@@ -295,14 +297,17 @@ try {
             <button @click="showInstructions = !showInstructions"><strong>{{showInstructions ? 'Hide Instructions' : 'Show Instructions' }}</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
             <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
+            <button style="color: #39F;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));">Creative Scripts</button>
 
         <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
+            <strong>Console</strong> Version 1.1 - 02 Aug 18.<br>
             Code in top box, results in bottom box.<br>
             <strong>Enter</strong> executes line.<br>
             <strong>{{commandAlt}} + Enter</strong> executes selected lines without inserting a line break.<br>
             <strong>Shift + Enter</strong> inserts line break without executing code.<br>
             <strong>Ctrl + {{commandAlt}} + Enter</strong> executes entire console press.<br>
-            <strong>Drag bottom right corners of boxes to adjust their heights.</strong>
+            <strong>Drag bottom right corners of boxes to adjust their heights.</strong><br>
+            To restart the console type in a new line "<strong>restartConsole!</strong>" + enter.
         </div>
         <div  style="font-size: 8pt;text-align: center;">
         </div>
