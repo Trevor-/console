@@ -198,10 +198,15 @@ try {
                     {
                         "keyCode": 52
                     }, // Mac Enter
-                    {
-                        "keyCode": 52,
-                        "metatKey": true
-                    }, // Mac Enter
+                    // {
+                    //     "keyCode": 52,
+                    //     "metatKey": true
+                    // }, // Mac Enter
+                    // {
+                    //     "keyCode": 52,
+                    //     "altKey": true,
+                    //     "ctrlKey": true
+                    // }, // Mac Enter
                     {
                         "keyCode": 76
                     }, // Mac Enter Number Pad
@@ -296,8 +301,8 @@ try {
             <button @click="saveSnippet">Save</button>
             <button @click="showInstructions = !showInstructions"><strong>{{showInstructions ? 'Hide Instructions' : 'Show Instructions' }}</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
-            <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
             <button style="color: #39F;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));">Creative Scripts</button>
+            <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
 
         <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
             <strong>Console</strong> Version 1.1 - 02 Aug 18.<br>
@@ -368,12 +373,14 @@ try {
                 if (key.shiftKey) {
                     return;
                 }
+                if (key.ctrlKey) {
+                    key.stopPropagation();
+                    key.preventDefault();
+                    return this.executeCode(true); // true is to run whole snippet
+                }
                 if (key.altKey || key.metaKey) {
                     key.stopPropagation();
                     key.preventDefault();
-                    if (key.ctrlKey) {
-                        return this.executeCode(true); // true is to run whole snippet
-                    }
                 }
                 return this.executeCode(false); // false is to run selected lines only
             },

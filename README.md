@@ -2,6 +2,9 @@
 
 ### What is this repository for? ###
 
+![][console]![][consoleSmall]
+
+
 #### JSX Console for Adobe apps. ####
 * To execute line of code, press enter after line.
 * To execute selected lines of code without inserting a line break, press command (alt) + enter.
@@ -13,3 +16,9 @@
 ### How do I get set up? ###
 
 * See http://creative-scripts.com/where-to-plonk-my-extensions/
+
+
+
+
+[console]: ./Images/console_buttons.png
+[consoleSmall]: ./Images/console_no_buttons.png
