@@ -84,6 +84,7 @@ try {
                 rules: [
                 { property: 'color', selector: '.editText' },
                 { property: 'color', selector: 'input[type="text"]' },
+                { property: 'caret-color', selector: 'input[type="text"]' },
                 { property: 'color', selector: '.console' },
                 { property: 'color', selector: '.selectDropdow' },
                 ]

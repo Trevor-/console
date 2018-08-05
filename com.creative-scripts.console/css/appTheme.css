@@ -40,6 +40,7 @@ input[type="text"] {
     background-color: rgba(227,227,227,255); /* editTextBackground */
     border-color: rgba(168,168,168,255); /* editTextBorderColor */
     color: rgba(35,35,35,255); /* editTextColor */
+    caret-color: rgba(35,35,35,255); /* editTextColor */;
 }
 
 input[type="text"]:focus {
