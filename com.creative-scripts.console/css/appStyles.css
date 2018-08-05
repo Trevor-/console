@@ -1,21 +1,3 @@
-:root {
-    --mainBackground: rgba(240, 240, 240, 255);
-    --mainColor: rgba(56, 56, 56, 255);
-    --editTextBackground: rgba(255, 255, 255, 255);
-    --editTextColor: rgba(56, 56, 56, 255);
-    --tooltipBackground: #888;
-    --tooltipColor: rgba(240, 240, 240, 255);
-    --tooltipBoxShadow: 1px 1px 4px 0px rgba(51, 51, 51, 0.75);
-    --editTextBorderColor: rgba(220, 220, 220, 255);
-    --buttonHoverBackground: #FFF;
-    --buttonActiveBackground: rgba(189, 189, 189, 255);
-    --inputFocus: #46A0F5;
-    --dropdownSelected: #666666;
-    --dropdownHover: #ddd;
-    --scrollbarThumb: rgba(193, 192, 192, 0.6);
-    --buttonFocus: rgba(120, 120, 120, .5);
-}
-
 
 /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
 
@@ -26,9 +8,11 @@
     font-style: normal;
 }
 
-body {
+body, .panel {
     overflow-y: visible !important;
     text-rendering: optimizelegibility;
+    font-family: LucidaGrande, Tahoma !important;
+    font-size: "10px";
 }
 
 :focus {
@@ -41,17 +25,9 @@ body {
 }
 
 
-.panel {
-    /*background-color: rgba(140,240,240,255);*/
-    background-color: var(--mainBackground);
-    color: var(--mainColor);
-    font-family: LucidaGrande, Tahoma !important;
-    font-size: "10px";
-}
+
 
 .editText {
-    background-color: var(--editTextBackground);
-    color: var(--editTextColor);
     width: 60px;
 }
 
@@ -66,12 +42,9 @@ body {
 .tooltip {
     display: block !important;
     z-index: 10000;
-    background-color: var(--tooltipBackground);
     padding: 2px 4px;
     font-size: 11px;
     margin: 8px;
-    color: var(--tooltipColor);
-    box-shadow: var(--tooltipBoxShadow);
     -webkit-animation: tooltipShow 4s 1 ease;
     -webkit-animation-fill-mode: forwards !important;
 }
@@ -89,11 +62,9 @@ body {
 }
 
 input[type="text"] {
-    background-color: var(--editTextBackground);
     /*padding: 3px 4px 6px 4px;*/
     text-indent: 3px;
     border-radius: 4px;
-    border-color: var(--editTextBorderColor);
     border-width: 1px;
     margin-top: 5px;
     font-family: LucidaGrande, Tahoma !important;
@@ -101,19 +72,16 @@ input[type="text"] {
     position: relative;
     width: 90px;
     height: 20px;
-    color: var(--editTextColor);
 }
 
 input[type="text"]:focus {
     outline: 0;
-    border-color: var(--inputFocus);
 }
 
 button,
 .button {
-    background-color: var(--mainBackground);
+    background-color: rgba(100,100,100,0); /* transparent will show mainBackground */
     border-radius: 4px;
-    border-color: var(--editTextBorderColor);
     border-width: 2px;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -121,29 +89,20 @@ button,
     font-family: LucidaGrande, Tahoma !important;
     border-style: solid;
     cursor: pointer;
-    color: var(--mainColor);
     user-select: none;
 }
 
 button:hover {
-    background-color: var(--buttonHoverBackground);
-    color: var(--buttonHoverColor);
 }
 
 button:active {
-    background-color: var(--buttonActiveBackground);
-    border-color: var(--buttonActiveBackground);
-    /*color: var(--buttonHoverColor);*/
 }
 
 button:focus {
     outline: 0;
-    border-color: var(--inputFocus);
-    background-color: var(--buttonFocus);
 }
 
 .buttonSelected {
-    background-color: var(--buttonFocus);
     /*border-color: blue;*/
 }
 
@@ -160,10 +119,8 @@ button:focus {
 
 .dropdown-input-div {
     display: inline-block;
-    background: var(--editTextBackground);
     ;
     /*border: 1px solid #dcdcdc;*/
-    border: 1px solid var(--editTextBorderColor);
     margin-top: 3px;
     height: 24px;
     border-radius: 5px;
@@ -174,13 +131,11 @@ button:focus {
 
 .dropdown-div {
     /* bottom: 12rem; */
-    background: var(--editTextBackground);
     max-height: 10rem;
     width: 246px;
     overflow-y: auto;
     font-size: .8em;
     line-height: 0.9;
-    border: 1px solid var(--editTextBorderColor);
     /*padding: 0px 1px 0px 5px;*/
     position: relative;
     left: 3px;
@@ -220,7 +175,6 @@ button:focus {
 }
 
 .dropdown-item:hover {
-    background: var(--dropdownHover);
 }
 
 .dropdown-button {
@@ -238,9 +192,7 @@ button:focus {
 
 
 .dropdown-button-middle {
-    background-color: var(--editTextBackground);
     border-radius: 0;
-    border-color: var(--editTextBorderColor);
     border-width: 1px;
     border-style: solid;
     position: relative;
@@ -266,11 +218,9 @@ button:focus {
 }
 
 .dropdown-select {
-    background: var(--dropdownHover);
 }
 
 .dropdown-selected {
-    color: var(--inputFocus);
     font-weight: 800;
 }
 
@@ -278,15 +228,12 @@ button:focus {
     min-height: 20px;
     height: 70px;
     /*max-height: 150px;*/
-    background-color: var(--editTextBackground);
     border-radius: 0;
-    border-color: var(--editTextBorderColor);
     border-width: 1px;
     border-style: solid;
     text-indent: 1px;
     margin-top: 5px;
     margin-bottom: 5px;
-    color: var(--editTextColor);
     /*overflow-y: auto;*/
     font-size: .8em;
     line-height: 1rem;
@@ -307,7 +254,6 @@ button:focus {
     height: 4px;
     cursor: n-resize;
     pointer-events: inherit;
-    box-shadow: 0px -1px 0px 0px var(--editTextBorderColor);
 }
 
 
@@ -393,18 +339,15 @@ button:focus {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     /*background: rgba(193, 192, 192, 0.8);*/
-    background: var(--scrollbarThumb);
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 
 /*::-webkit-scrollbar-track-piece {
-    background: var(--editTextBackground);
 }
 */
 
 .console::-webkit-resizer {
-    /*background-color: var(--editTextBackground) !important;*/
     visibility: hidden;
 }
 
@@ -434,15 +377,11 @@ button:focus {
 }
 .selectDropdow{
     height: 24px;
-    background-color: var(--editTextBackground);
-    color: var(--editTextColor);
     position: relative;
     bottom: 2px;
     min-width: 65px;
-    border-color: var(--editTextBorderColor);
 }
 .selectDropdow:focus{
-    border-color: var(--inputFocus);
 }
 
 .mainButtons{

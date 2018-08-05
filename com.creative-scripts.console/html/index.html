@@ -4,8 +4,8 @@
 <head>
     <title>Console</title>
     <meta charset="utf-8">
-    <link id="appStyle" rel="stylesheet" href="../css/styles.css" />
-    <!-- <link id="tailwind" rel="stylesheet" href="../css/tailwind.css" /> -->
+    <link id="theme" rel="stylesheet" href="../css/appTheme.css" />
+    <link id="appStyle" rel="stylesheet" href="../css/appStyles.css" />
     <script>
     if (typeof module === 'object') {
         window.module = module;
@@ -25,14 +25,14 @@
     if (window.module) module = window.module;
     if (window.exports) exports = window.exports;
     if (window.require) require = window.require;
-    var exec = require('child_process').exec;
+    var exec = (typeof require !== 'undefined') ? require('child_process').exec : function(){window.open('http://www.creative-scripts.com', '_blank');};
     </script>
     <script src="../js/libs/CSInterface.js"></script>
-    <script src="../js/themeManager.js"></script>
     <script src="../js/JSX.js"></script>
 </head>
 
 <body class="panel" spellcheck="false">
+    <script src="../js/themeManager.js"></script>
     <div id="main" style="text-align: center;">
         <a id="restart-extension" href="./index.html">
             <span class="button"
@@ -41,21 +41,12 @@
         margin-bottom: 3px;
         color: #39F;
         display: inline-block;
+        display: none;
         font-size: 9pt;"
         ><strong>Restart<br>Console</strong></span></a>
-        <span class="button"
-        onclick="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"
-        style="padding: 4px;
-        margin: 0px;
-        color: #39F;
-        display: inline-block;
-        text-align: center;
-        font-size: 9pt;"
-        ><strong>© Creative Scripts <span style="font-size: 8pt;"><br> Custom Scripts, Extensions and Apps</strong></span></span>
     </div>
     <div id="app">
     </div>
-    <!-- <script src="../js/LogFactory.js"></script> -->
     <script src="../js/console.js"></script>
 </body>
 

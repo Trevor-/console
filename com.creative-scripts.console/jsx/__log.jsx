@@ -323,4 +323,41 @@ var __sel, __doc;
         if (doc) { return doc; }
         throw new Error('Error: There are no open documents.');
     };
+    $.leak = $.leak || function(){
+    var oldSummary, newSummary, summaryObject, diffObject, key, diffArrray, report, count, value;
+    oldSummary = this.oldSummary || {};
+    newSummary = $.summary();
+    summaryObject = {};
+    diffObject = {};
+    newSummary.replace(/(\d+) (\S+)/g, function(whole, count, prop){
+        var diff;
+        count = +count;
+        summaryObject[prop] = count;
+        diff = count - (oldSummary[prop] || 0);
+        if (diff) {
+            diffObject[prop] = diff;
+        }
+    });
+    for (key in oldSummary){
+        if(!summaryObject[key]){
+            diffObject[key] = -oldSummary[key];
+        }
+    }
+    this.oldSummary = summaryObject;
+    diffArrray = [];
+    for (key in diffObject){
+        value = diffObject[key];
+        if (value > 0) { value = '+' + value;}
+        diffArrray.push([key, '\t' + value , '\t' + summaryObject[key]]);
+    }
+    diffArrray.sort(function(a,b){
+        if (a[1] === b[1]) { return 0;}
+        if (+a[1] > +b[1]) { return -1;}
+        return 1;
+    });
+    count = diffArrray.length;
+    if(!count) {return 'No change from last $.leak()';}
+    report = diffArrray.join('\n').replace(/,/g, ': ');
+    return count + ' memory change' + (count > 1 ? 's' : '') + '\n' + diffArrray.join('\n').replace(/,/g, ': ');
+};
 })();

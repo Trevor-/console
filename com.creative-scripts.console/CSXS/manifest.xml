@@ -4,7 +4,7 @@
     <Legal>Written under the do not complain do not sue license. DON'T FORGET TO PAY UP!</Legal>
     <Abstract>Console</Abstract>
     <ExtensionList>
-        <Extension Id="com.creative-scripts.console" Version="1" />
+        <Extension Id="com.creative-scripts.console" Version="1.2" />
     </ExtensionList>
     <ExecutionEnvironment>
         <HostList>
@@ -42,7 +42,7 @@
             <Host Name="DRWV" Version="16" />
             <!-- Muse -->
             <!-- Not showing up -->
-            <Host Name="MUSE" Version="2017" />
+            <Host Name="MUSE" Version="2015" />
             <!-- Bridge -->
             <!-- Not showing up -->
             <Host Name="KBRG" Version="1" />
@@ -84,7 +84,7 @@
                             <Width>343</Width>
                         </Size>
                         <MinSize>
-                            <Height>300</Height>
+                            <Height>170</Height>
                             <Width>300</Width>
                         </MinSize>
                         <MaxSize>
@@ -92,6 +92,13 @@
                             <Width>1000</Width>
                         </MaxSize>
                     </Geometry>
+                    <Icons>
+                        <Icon Type="Normal">./resources/Icons/IconLight.png</Icon>
+                        <Icon Type="RollOver">./resources/Icons/IconLight.png</Icon>
+                        <Icon Type="Disabled">./resources/Icons/IconDark.png</Icon>
+                        <Icon Type="DarkNormal">./resources/Icons/IconDark.png</Icon>
+                        <Icon Type="DarkRollOver">./resources/Icons/IconDark.png</Icon>
+                    </Icons>
                 </UI>
             </DispatchInfo>
         </Extension>

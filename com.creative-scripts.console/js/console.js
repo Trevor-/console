@@ -13,7 +13,7 @@ window.gVue = new Vue({
     }
 });
 
-var fs = require('fs');
+var exec = (typeof require !== 'undefined') ? require('child_process').exec : function(){window.open('http://www.creative-scripts.com', '_blank');};
 
 var __log = function(message, style, __class, elementType, consoleID) {
     if (typeof message === 'undefined') {
@@ -198,10 +198,15 @@ try {
                     {
                         "keyCode": 52
                     }, // Mac Enter
-                    {
-                        "keyCode": 52,
-                        "metatKey": true
-                    }, // Mac Enter
+                    // {
+                    //     "keyCode": 52,
+                    //     "metatKey": true
+                    // }, // Mac Enter
+                    // {
+                    //     "keyCode": 52,
+                    //     "altKey": true,
+                    //     "ctrlKey": true
+                    // }, // Mac Enter
                     {
                         "keyCode": 76
                     }, // Mac Enter Number Pad
@@ -273,7 +278,8 @@ try {
     Vue.component('console', {
         props: ['id'],
         template: `
-        <div :id="id || 'console'">
+        <div :id="id || 'console'"
+         @keydown="console.log($event)">
         <textarea
                 :id="'evalCode' + (id ? id : '')"
                 ref="consoleInput"
@@ -289,19 +295,24 @@ try {
           :id="'consoleOutput' + (id ? id : '')"
           contenteditable="true"
         ></div>
-            <button @click="showInstructions = !showInstructions"><strong>Instructions</strong></button>
+            <button @click="executeCode(true)">Run</button>
+            <button @click="executeCode(false)">Run selected lines</button>
             <button @click="openSnippet">Open</button>
             <button @click="saveSnippet">Save</button>
+            <button @click="showInstructions = !showInstructions"><strong>{{showInstructions ? 'Hide Instructions' : 'Show Instructions' }}</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
+            <button style="color: #39F;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"><strong>Creative Scripts</strong></button>
             <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
 
         <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
+            <strong>Console</strong> Version 1.2 - 05 Aug 18.<br>
             Code in top box, results in bottom box.<br>
             <strong>Enter</strong> executes line.<br>
-            <strong>{{commandAlt}} + Enter</strong> executes selected lines without inserting a line break.<br>
+            <strong>{{isMac ? 'Option':'Alt'}} + Enter</strong> executes selected lines without inserting a line break.<br>
             <strong>Shift + Enter</strong> inserts line break without executing code.<br>
-            <strong>Ctrl + {{commandAlt}} + Enter</strong> executes entire console press.<br>
-            <strong>Drag bottom right corners of boxes to adjust their heights.</strong>
+            <strong>Ctrl + Enter</strong> executes entire console press.<br>
+            <strong>Drag bottom right corners of boxes to adjust their heights.</strong><br>
+            To restart the console type in a new line "<strong>restartConsole!</strong>" + enter.
         </div>
         <div  style="font-size: 8pt;text-align: center;">
         </div>
@@ -318,7 +329,7 @@ try {
                 focus: null,
                 id: null,
                 code: null,
-                commandAlt: navigator.platform[0] === 'M' ? 'Option' : 'alt',
+                isMac: navigator.platform[0] === 'M',
                 showInstructions: false
             };
         },
@@ -329,23 +340,23 @@ try {
             jsxResult: function(result) {
                 var isBug, beforeBugLine, bugLine, bugLineParts,
                     beforeBug, bug, afterBug;
-                if (result === 'undefined' || !result.length) {return; }
+                if (result === 'undefined' || !result.length) { return; }
                 // Check if result is error
                 if (/^\S+Error/.test(result.substring(0, 20))) {
-                    isBug = /QBug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
+                    isBug = /Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b/.exec(result);
                     if (isBug) {
-                        beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/,'');
+                        beforeBugLine = result.replace(/Bug:[\S\s]*?\u2a0b\u2a0b[\S\s]*?\u2a0b\u2a0b[\S\s]*?$/, '');
                         // need to check this out of CJK
                         bugLine = result.substring(beforeBugLine.length);
                         bugLineParts = bugLine.split(/\u2a0b\u2a0b/);
                         __log(beforeBugLine, 'font-weight:600;color:#ff8c8c;');
-                        if(bugLineParts[0]){
+                        if (bugLineParts[0]) {
                             __log(bugLineParts[0], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
-                        if(bugLineParts[1]){
+                        if (bugLineParts[1]) {
                             __log(bugLineParts[1], 'font-weight:800;color:rgb(0,0,0);background:rgb(255,217,217);padding:2px;border-radius:4px;', undefined, 'span');
                         }
-                        if(bugLineParts[2]){
+                        if (bugLineParts[2]) {
                             __log(bugLineParts[2], 'font-weight:600;color:#ff8c8c;', undefined, 'span');
                         }
 
@@ -358,16 +369,26 @@ try {
             },
             logEnter: function(key) {
                 var contents = this.code;
-                if (contents === null) { return;}
+                if (contents === null) { return; }
                 if (key.shiftKey) {
                     return;
+                }
+                if (key.ctrlKey) {
+                    key.stopPropagation();
+                    key.preventDefault();
+                    return this.executeCode(true); // true is to run whole snippet
                 }
                 if (key.altKey || key.metaKey) {
                     key.stopPropagation();
                     key.preventDefault();
-                    if (key.ctrlKey) {
-                        return jsx.evalscript(contents, this.jsxResult);
-                    }
+                }
+                return this.executeCode(false); // false is to run selected lines only
+            },
+            executeCode: function(runWholeSnippet) {
+                var contents = this.code;
+                if (contents === null) { return; }
+                if (runWholeSnippet) {
+                    return jsx.evalscript(contents, this.jsxResult);
                 }
                 var div = this.consoleInputDiv;
                 var codeStart = div.selectionStart;
@@ -381,10 +402,17 @@ try {
                 // __log(before, 'background:lightgreen', undefined, 'span');
                 // __log(middle, 'background:orange', undefined, 'span');
                 // __log(after, 'background:pink', undefined, 'span');
+                // allow for restarting the console by typing restartConsole! in the console
+                if(script === 'restartConsole!'){
+                    document.location.href = '../html/index.html';
+                    return;
+                }
                 jsx.evalscript(script, this.jsxResult);
+
             },
-            openSnippet: function(){
+            openSnippet: function() {
                 var snippet;
+                var fs = require('fs');
                 snippet = window.cep.fs.showOpenDialog(false, false, 'Please select a Snippet');
                 snippet = '' + snippet.data[0];
                 if (snippet === '' || snippet === 'undefined' || snippet === 'null') {
@@ -397,8 +425,9 @@ try {
                     __this.consoleInputDiv.value = '' + result;
                 });
             },
-            saveSnippet: function(){
+            saveSnippet: function() {
                 var snippet;
+                var fs = require('fs');
                 snippet = window.cep.fs.showSaveDialogEx('Save Snippet');
                 snippet = '' + snippet.data;
                 if (snippet === '' || snippet === 'undefined' || snippet === 'null') {
