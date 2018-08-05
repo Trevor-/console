@@ -84,7 +84,7 @@
                             <Width>343</Width>
                         </Size>
                         <MinSize>
-                            <Height>160</Height>
+                            <Height>170</Height>
                             <Width>300</Width>
                         </MinSize>
                         <MaxSize>
@@ -93,11 +93,11 @@
                         </MaxSize>
                     </Geometry>
                     <Icons>
-                        <Icon Type="Normal">./resources/Icons/Icon.png</Icon>
-                        <Icon Type="RollOver">./resources/Icons/Icon.png</Icon>
-                        <Icon Type="Disabled">./resources/Icons/Icon.png</Icon>
-                        <Icon Type="DarkNormal">./resources/Icons/Icon.png</Icon>
-                        <Icon Type="DarkRollOver">./resources/Icons/Icon.png</Icon>
+                        <Icon Type="Normal">./resources/Icons/IconLight.png</Icon>
+                        <Icon Type="RollOver">./resources/Icons/IconLight.png</Icon>
+                        <Icon Type="Disabled">./resources/Icons/IconDark.png</Icon>
+                        <Icon Type="DarkNormal">./resources/Icons/IconDark.png</Icon>
+                        <Icon Type="DarkRollOver">./resources/Icons/IconDark.png</Icon>
                     </Icons>
                 </UI>
             </DispatchInfo>
