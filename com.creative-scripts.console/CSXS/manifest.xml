@@ -46,7 +46,6 @@
             <!-- Bridge -->
             <!-- Not showing up -->
             <Host Name="KBRG" Version="1" />
-            <Host Name="BRDG" Version="1" />
         </HostList>
         <LocaleList>
             <Locale Code="All" />
