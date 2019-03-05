@@ -297,14 +297,14 @@ try {
         ></div>
             <button @click="executeCode(true)">Run</button>
             <button @click="executeCode(false)">Run selected lines</button>
-            <button @click="openSnippet">Open</button>
-            <button @click="saveSnippet">Save</button>
             <button @click="fontSize+=0.05">+</button>
             <button @click="fontSize-=0.05">-</button>
             <button @click="consoleOutputDiv.innerText = ''">X</button>
-            <button @click="jsx.eval('$.props()')">$.props</button>
-            <button style="color: #39F;font-size: .7em;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"><strong>Creative Scripts</strong></button>
             <button @click="showInstructions = !showInstructions"><strong>?</strong></button>
+            <button @click="jsx.eval('$.props()')">$.props</button>
+            <button @click="openSnippet">Open</button>
+            <button @click="saveSnippet">Save</button>
+            <button style="color: #39F;font-size: .7em;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"><strong>Creative Scripts</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
             
             <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;box-shadow: 0 0 2px;padding: 2px;">

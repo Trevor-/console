@@ -1,14 +1,14 @@
 # Console #
 #### JSX Console for Adobe apps. ####
-__CONSOLE© Version 1.3 - 05 Mar 19__
+__CONSOLE Version 1.3 - 05 Mar 19__
 
 __Works in most Adobe Creative Cloud apps, including After Effects, Illustrator, InCopy, InDesign, Photoshop and Premier Pro.__
 
 ![][console]
 
-__Can be used without buttons__<br>
-![][consoleSmall]
+__Can be used without buttons__
 
+![][consoleSmall]
 
 * To execute line of code, press Enter.
 * To execute selected lines of code without inserting a line break, press Option (Mac) / Alt (Windows) + Enter.
@@ -77,5 +77,5 @@ In addition to the standard ExtendScript there are a few helper functions, these
 * Copyright Trevor [Creative Scripts](https://creative-scripts.com)
 
 
-[console]: ./Images/console_buttons.png
+[console]: ./Images/console_v1_3.png
 [consoleSmall]: ./Images/console_no_buttons.png
