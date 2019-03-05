@@ -1,6 +1,6 @@
 # Console #
 #### JSX Console for Adobe apps. ####
-__CSTKÂ© Version 1.2 - 05 Aug 18__
+__CONSOLE© Version 1.3 - 05 Mar 19__
 
 __Works in most Adobe Creative Cloud apps, including After Effects, Illustrator, InCopy, InDesign, Photoshop and Premier Pro.__
 
@@ -58,6 +58,13 @@ In addition to the standard ExtendScript there are a few helper functions, these
 * `$.writeln()` can contain css markup `$.writeln('Hi', 'background:blue;color:yellow;')`. Arrays and objects are automatically expanded, no `[object Object]`.
 * `__doc()` returns the doc. Default current doc `__doc().name`
 * `__sel()` returns the current selection `__sel().width` is easier than `app.selection[0].width`
+
+### Change Log ###
+
+* Version 1.3 - 05 Mar 19
+    * Added buttons for changing console font size.
+    * Improved $.props function to show methods as well.
+    * Added $.props button to show properties and methods of selection.
 
 ### License ###
 

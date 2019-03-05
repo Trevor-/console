@@ -117,7 +117,10 @@ button:focus {
     box-shadow: 0px -1px 0px 0px rgba(168,168,168,255); /* editTextBorderColor */
 }
 
-
+.error{
+    color:red;
+    font-weight:600;
+}
 
 ::-webkit-scrollbar-thumb {
     background: rgba(193, 192, 192, 0.6); /* scrollbarThumb */

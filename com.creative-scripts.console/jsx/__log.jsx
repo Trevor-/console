@@ -180,7 +180,7 @@ var __sel, __doc;
          * On InDesign the enums are given in the form topRightCornerOption: 1852796517 /* CornerOptions.NONE */
         /* @return {object} {properties: results.join('\n'), errors: errors.join('\n')}; */
         $.props = function() {
-            var arg, n, l, props, errors, results, prop, target, selTaget, getProp, propString, error, level;
+            var arg, n, l, props, methods, errors, results, prop, target, selTarget, getProp, propString, error, level;
             props = [];
             errors = [];
             results = [];
@@ -268,8 +268,8 @@ var __sel, __doc;
             };
             // If the target is provided as an array that specifies the app.selection[0] try and resolve the target;
             if (target.constructor === Array) {
-                selTaget = (app.selection && (app.selection[0] || (app.selection.length && app.selection))) || app;
-                if (selTaget === app) {
+                selTarget = (app.selection && (app.selection[0] || (app.selection.length && app.selection))) || app;
+                if (selTarget === app) {
                     propString = 'app';
                 } else {
                     propString = app.selection && app.selection[0] ? 'app.selection[0]' : 'app.selection';
@@ -279,13 +279,13 @@ var __sel, __doc;
                     prop = target[n];
                     propString += '["' + prop + '"]';
                     try {
-                        selTaget = selTaget[prop];
+                        selTarget = selTarget[prop];
                     } catch (err) {
                         return error('\ud83d\ude91 The target ' + propString + ' is not valid' + '\n' + err);
                     }
                 }
             }
-            target = selTaget || target;
+            target = selTarget || target;
             if (props.length) { // if properties have been selected then only find them
                 l = props.length;
                 for (n = 0; n < l; n++) {
@@ -298,16 +298,19 @@ var __sel, __doc;
                     getProp(prop, target);
                 }
             }
-            __log('target' + (propString ? ' - ' + propString : '') + ': ' + target);
+            __log('Target' + (propString ? ' - ' + propString : '') + ': ' + target, 'background:yellow;color:blue;padding:2px;margin-top:2px;font-weight:800;');
             if (results.length) {
-                __log(results.join('\n'), 'color:rgb(29, 225, 29);font-weight:600;');
+                __log('Properties:\n' + results.join('\n'), 'color:rgb(29, 225, 29);font-weight:600;');
             }
             if (errors.length) {
-                __error(errors.join('\n'));
+                __error('Invalid Properties:\n' + errors.join('\n'));
+            }
+            methods = target.reflect.methods;
+            if (methods.length) {
+                __log('Methods:\n' + methods.join('()\n') + '()', 'color:#39F;font-weight:600;');
             }
             $.level = level;
-            return { properties: results.join('\n'), errors: errors.join('\n') };
-        };
+            return { properties: results, methods: methods, errors: errors };        };
     } else {
         $.props = __log = __error = __result = $.writeln;
     }
@@ -324,7 +327,7 @@ var __sel, __doc;
         throw new Error('Error: There are no open documents.');
     };
     $.leak = $.leak || function(){
-    var oldSummary, newSummary, summaryObject, diffObject, key, diffArrray, report, count, value;
+    var oldSummary, newSummary, summaryObject, diffObject, key, diffArray, count, value;
     oldSummary = this.oldSummary || {};
     newSummary = $.summary();
     summaryObject = {};
@@ -344,20 +347,20 @@ var __sel, __doc;
         }
     }
     this.oldSummary = summaryObject;
-    diffArrray = [];
+    diffArray = [];
     for (key in diffObject){
         value = diffObject[key];
         if (value > 0) { value = '+' + value;}
-        diffArrray.push([key, '\t' + value , '\t' + summaryObject[key]]);
+        diffArray.push([key, '\t' + value , '\t' + summaryObject[key]]);
     }
-    diffArrray.sort(function(a,b){
+    diffArray.sort(function(a,b){
         if (a[1] === b[1]) { return 0;}
         if (+a[1] > +b[1]) { return -1;}
         return 1;
     });
-    count = diffArrray.length;
+    count = diffArray.length;
     if(!count) {return 'No change from last $.leak()';}
-    report = diffArrray.join('\n').replace(/,/g, ': ');
-    return count + ' memory change' + (count > 1 ? 's' : '') + '\n' + diffArrray.join('\n').replace(/,/g, ': ');
+    report = diffArray.join('\n').replace(/,/g, ': ');
+    return count + ' memory change' + (count > 1 ? 's' : '') + '\n' + diffArray.join('\n').replace(/,/g, ': ');
 };
 })();

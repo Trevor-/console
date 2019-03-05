@@ -235,8 +235,8 @@ button:focus {
     margin-top: 5px;
     margin-bottom: 5px;
     /*overflow-y: auto;*/
-    font-size: .8em;
-    line-height: 1rem;
+    /* font-size: .8em; */
+    /* line-height: 1rem; */
     resize: vertical;
     overflow-y: scroll;
     display: block;
