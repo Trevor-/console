@@ -2,6 +2,32 @@ var __log, __error, __result;
 var __sel, __doc;
 
 (function() {
+    var isNotAiDomGroup = function (DOM) {
+        if (('' + DOM) === DOM) {
+            return true;
+        }
+        if (!DOM) {
+            return true;
+        }
+        var string, property, a, c;
+        a = ['length', 'parent', 'length', 'typename'];
+        string = '';
+        c = 0;
+        for (property in DOM) {
+            string += property;
+            if (a[c] && (a[c] !== property)) {
+                a = c = property = string = null;
+                return true;
+            }
+            if (string === 'lengthparentlengthtypename') { 
+                a = c = property = string = null;
+                return false;
+             }
+            c++;
+        };
+        a = c = property = string = null;
+        return true;
+    };
     const ARRAY_SPLIT = ';;@;\u0800;:@#;';
     if (new ExternalObject('lib:PlugPlugExternalObject')) {
         $.dispatch = function(in_eventType, in_message) {
@@ -15,7 +41,7 @@ var __sel, __doc;
             __class = __class || '';
             elementType = elementType || 'span';
             consoleID = consoleID || '';
-            if (message && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
+            if (message && isNotAiDomGroup(message) && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
             $.dispatch('com.creative-scripts.console.__log', [message, style, __class, elementType, consoleID].join(ARRAY_SPLIT));
         };
         $.writeln = __log = function(message, style, __class, elementType, consoleID) {
@@ -23,7 +49,7 @@ var __sel, __doc;
             __class = __class || '';
             elementType = elementType || '';
             consoleID = consoleID || '';
-            if (message && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
+            if (message && isNotAiDomGroup(message) && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
             $.dispatch('com.creative-scripts.console.__log', [message, style, __class, elementType, consoleID].join(ARRAY_SPLIT));
         };
         __error = function(message, style) {
@@ -31,15 +57,15 @@ var __sel, __doc;
         };
         __result = function(error, result, stderr) {
             if (error !== undefined) {
-                if (error.constructor === Object || error.constructor === Array) { error = error.toSource(); }
+                if (isNotAiDomGroup(error) && (error.constructor === Object || error.constructor === Array)) { error = error.toSource(); }
                 __error('Error: ' + error);
             }
             if (stderr !== undefined) {
-                if (stderr.constructor === Object || stderr.constructor === Array) { stderr = stderr.toSource(); }
+                if (isNotAiDomGroup(stderr) && (stderr.constructor === Object || stderr.constructor === Array)) { stderr = stderr.toSource(); }
                 __error('Stderr: ' + stderr);
             }
             if (result !== undefined) {
-                if (result.constructor === Object || result.constructor === Array) { result = result.toSource(); }
+                if (isNotAiDomGroup(result)&& (result.constructor === Object || result.constructor === Array)) { result = result.toSource(); }
                 __log('Result: ' + result);
             }
         };
