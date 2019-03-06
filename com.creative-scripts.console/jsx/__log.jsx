@@ -29,6 +29,7 @@ var __sel, __doc;
         return true;
     };
     const ARRAY_SPLIT = ';;@;\u0800;:@#;';
+    var log;
     if (new ExternalObject('lib:PlugPlugExternalObject')) {
         $.dispatch = function(in_eventType, in_message) {
             var eventObj = new CSXSEvent();
@@ -36,24 +37,29 @@ var __sel, __doc;
             eventObj.data = '' + in_message;
             eventObj.dispatch();
         };
+
+        log = function (message, style, __class, elementType, consoleID, defaultElementType) {
+            style = style || '';
+            __class = __class || '';
+            elementType = elementType || defaultElementType || '';
+            consoleID = consoleID || '';
+            if (message && isNotAiDomGroup(message) && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
+            $.dispatch('com.creative-scripts.console.__log', [message, style, __class, elementType, consoleID].join(ARRAY_SPLIT));
+        }
         $.write = function(message, style, __class, elementType, consoleID) {
-            style = style || '';
-            __class = __class || '';
-            elementType = elementType || 'span';
-            consoleID = consoleID || '';
-            if (message && isNotAiDomGroup(message) && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
-            $.dispatch('com.creative-scripts.console.__log', [message, style, __class, elementType, consoleID].join(ARRAY_SPLIT));
+            log(message, style, __class, elementType, consoleID, 'span');
         };
-        $.writeln = __log = function(message, style, __class, elementType, consoleID) {
-            style = style || '';
-            __class = __class || '';
-            elementType = elementType || '';
-            consoleID = consoleID || '';
-            if (message && isNotAiDomGroup(message) && (message.constructor === Object || message.constructor === Array)) { message = message.toSource(); }
-            $.dispatch('com.creative-scripts.console.__log', [message, style, __class, elementType, consoleID].join(ARRAY_SPLIT));
+        $.writeln = function(message, style, __class, elementType, consoleID) {
+            log(message, style, __class, elementType, consoleID, '');
         };
+
+        __log = function (message, style, __class, elementType, consoleID) {
+            if(__log.off){return;}
+            log(message, style, __class, elementType, consoleID, '');
+        };
+
         __error = function(message, style) {
-            __log(message, style, 'error');
+            $.writeln(message, style, 'error');
         };
         __result = function(error, result, stderr) {
             if (error !== undefined) {
@@ -66,7 +72,7 @@ var __sel, __doc;
             }
             if (result !== undefined) {
                 if (isNotAiDomGroup(result)&& (result.constructor === Object || result.constructor === Array)) { result = result.toSource(); }
-                __log('Result: ' + result);
+                $.writeln('Result: ' + result);
             }
         };
 
@@ -206,7 +212,7 @@ var __sel, __doc;
          * On InDesign the enums are given in the form topRightCornerOption: 1852796517 /* CornerOptions.NONE */
         /* @return {object} {properties: results.join('\n'), errors: errors.join('\n')}; */
         $.props = function() {
-            var arg, n, l, props, methods, errors, results, prop, target, selTarget, getProp, propString, error, level;
+            var arg, n, l, props, methods, errors, results, prop, target, selTarget, getProp, propString, error, level, notAiCollection;
             props = [];
             errors = [];
             results = [];
@@ -218,7 +224,6 @@ var __sel, __doc;
                 str = $.getEnum(_enum, prop);
                 str = str && str.join(', ');
                 return str ? (+_enum + ' /* ' + str + ' */') : _enum;
-
             };
             error = function(message) {
                 var errorMessage = [
@@ -233,6 +238,7 @@ var __sel, __doc;
                 ].join('\n');
                 message = message ? message + '\n' + errorMessage : errorMessage;
                 $.level = level;
+                propEnum = error = getProp = null;
                 return __log(message, 'color:red; top:10px; margin-left:3px;position: relative;');
             };
             for (n = 0; n < l; n++) {
@@ -293,7 +299,8 @@ var __sel, __doc;
                 }
             };
             // If the target is provided as an array that specifies the app.selection[0] try and resolve the target;
-            if (target.constructor === Array) {
+            notAiCollection = isNotAiDomGroup(target);
+            if (notAiCollection && target.constructor === Array) {
                 selTarget = (app.selection && (app.selection[0] || (app.selection.length && app.selection))) || app;
                 if (selTarget === app) {
                     propString = 'app';
@@ -331,11 +338,12 @@ var __sel, __doc;
             if (errors.length) {
                 __error('Invalid Properties:\n' + errors.join('\n'));
             }
-            methods = target.reflect.methods;
+            methods = notAiCollection ? target.reflect.methods : [];
             if (methods.length) {
                 __log('Methods:\n' + methods.join('()\n') + '()', 'color:#39F;font-weight:600;');
             }
             $.level = level;
+            propEnum = error = getProp = null;
             return { properties: results, methods: methods, errors: errors };        };
     } else {
         $.props = __log = __error = __result = $.writeln;
