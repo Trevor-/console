@@ -309,7 +309,7 @@ try {
             
             <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;box-shadow: 0 0 2px;padding: 2px;">
                 <button @click="showInstructions = false" style="float:right;"><strong>X</strong></button>
-                <strong>Console</strong> Version 1.3 - 05 Mar 19.<br>
+                <strong>Console</strong> Version 1.4 - 06 Mar 19.<br>
                 <strong>Created by: Trevor <span 
                     style="color:#39f;text-decoration: underline;cursor: pointer;"
                     @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"

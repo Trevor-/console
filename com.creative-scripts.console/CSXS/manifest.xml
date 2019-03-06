@@ -40,13 +40,7 @@
             <!-- Dreamweaver -->
             <!-- JSX Console doesn't work JS, Shell and other features work look like they work -->
             <Host Name="DRWV" Version="16" />
-            <!-- Muse -->
-            <!-- Not showing up -->
-            <Host Name="MUSE" Version="2015" />
-            <!-- Bridge -->
-            <!-- Not showing up -->
-            <Host Name="KBRG" Version="1" />
-            <Host Name="BRDG" Version="1" />
+
         </HostList>
         <LocaleList>
             <Locale Code="All" />

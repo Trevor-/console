@@ -1,6 +1,6 @@
 # Console #
 #### JSX Console for Adobe apps. ####
-__CONSOLE Version 1.3 - 05 Mar 19__
+__CONSOLE Version 1.4 - 06 Mar 19__
 
 __Works in most Adobe Creative Cloud apps, including After Effects, Illustrator, InCopy, InDesign, Photoshop and Premier Pro.__
 
@@ -65,6 +65,11 @@ In addition to the standard ExtendScript there are a few helper functions, these
     * Added buttons for changing console font size.
     * Improved $.props function to show methods as well.
     * Added $.props button to show properties and methods of selection.
+* Version 1.4 - 06 Mar 19
+    * `__log()` can be turned off by using `__log.off = true` and back on with `__log.off = false`.
+    * On Adobe Illustrator `__log(__doc().pageItems)` and `$.props(__doc().pageItems)` without the `[n]` no longer throw errors.
+    * The same applies to all collections `pageItems` is just an example of a collection. InDesign treats collections very differently and was working. 
+    * Clean up of __log.jsx.
 
 ### License ###
 
