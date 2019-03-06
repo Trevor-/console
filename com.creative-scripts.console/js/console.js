@@ -274,18 +274,17 @@ try {
     });
 
 
-
     Vue.component('console', {
         props: ['id'],
         template: `
-        <div :id="id || 'console'"
-         @keydown="console.log($event)">
+        <div :id="id || 'console'">
         <textarea
                 :id="'evalCode' + (id ? id : '')"
                 ref="consoleInput"
                 class="console"
                 v-model="code"
                 style="border-color: lightblue; width: calc(100% - 5px);"
+                :style="{'font-size':fontSize + 'em'}"
                 contenteditable="true"
                 @keydown.enter="logEnter"
         ></textarea>
@@ -293,27 +292,37 @@ try {
           class="console"
           ref="consoleOutput"
           :id="'consoleOutput' + (id ? id : '')"
+          :style="{'font-size':fontSize + 'em'}"
           contenteditable="true"
         ></div>
             <button @click="executeCode(true)">Run</button>
             <button @click="executeCode(false)">Run selected lines</button>
+            <button @click="fontSize+=0.05">+</button>
+            <button @click="fontSize-=0.05">-</button>
+            <button @click="consoleOutputDiv.innerText = ''">X</button>
+            <button @click="showInstructions = !showInstructions"><strong>?</strong></button>
+            <button @click="jsx.eval('$.props()')">$.props</button>
             <button @click="openSnippet">Open</button>
             <button @click="saveSnippet">Save</button>
-            <button @click="showInstructions = !showInstructions"><strong>{{showInstructions ? 'Hide Instructions' : 'Show Instructions' }}</strong></button>
+            <button style="color: #39F;font-size: .7em;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"><strong>Creative Scripts</strong></button>
             <!-- <button @click="consoleInputDiv.value = ''">Clear Code</button> -->
-            <button style="color: #39F;" title="Custom Extensions, Scripts and Apps" @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"><strong>Creative Scripts</strong></button>
-            <button @click="consoleOutputDiv.innerText = ''">Clear Results</button>
-
-        <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;">
-            <strong>Console</strong> Version 1.2 - 05 Aug 18.<br>
-            Code in top box, results in bottom box.<br>
-            <strong>Enter</strong> executes line.<br>
-            <strong>{{isMac ? 'Option':'Alt'}} + Enter</strong> executes selected lines without inserting a line break.<br>
-            <strong>Shift + Enter</strong> inserts line break without executing code.<br>
-            <strong>Ctrl + Enter</strong> executes entire console press.<br>
-            <strong>Drag bottom right corners of boxes to adjust their heights.</strong><br>
-            To restart the console type in a new line "<strong>restartConsole!</strong>" + enter.
-        </div>
+            
+            <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;box-shadow: 0 0 2px;padding: 2px;">
+                <button @click="showInstructions = false" style="float:right;"><strong>X</strong></button>
+                <strong>Console</strong> Version 1.3 - 05 Mar 19.<br>
+                <strong>Created by: Trevor <span 
+                    style="color:#39f;text-decoration: underline;cursor: pointer;"
+                    @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"
+                    >Creative Scripts</span></strong><br>
+                <strong>Contributors: Coming Soon?</strong><br>
+                Code in top box, results in bottom box.<br>
+                <strong>Enter</strong> executes line.<br>
+                <strong>{{isMac ? 'Option':'Alt'}} + Enter</strong> executes selected lines without inserting a line break.<br>
+                <strong>Shift + Enter</strong> inserts line break without executing code.<br>
+                <strong>Ctrl + Enter</strong> executes entire console press.<br>
+                <strong>Drag bottom right corners of boxes to adjust their heights.</strong><br>
+                To restart the console type in a new line "<strong>restartConsole!</strong>" + enter.
+            </div>
         <div  style="font-size: 8pt;text-align: center;">
         </div>
         </div>`,
@@ -330,7 +339,8 @@ try {
                 id: null,
                 code: null,
                 isMac: navigator.platform[0] === 'M',
-                showInstructions: false
+                showInstructions: false,
+                fontSize: 0.8
             };
         },
         methods: {

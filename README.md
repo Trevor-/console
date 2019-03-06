@@ -1,14 +1,14 @@
 # Console #
 #### JSX Console for Adobe apps. ####
-__CSTK© Version 1.2 - 05 Aug 18__
+__CONSOLE Version 1.3 - 05 Mar 19__
 
 __Works in most Adobe Creative Cloud apps, including After Effects, Illustrator, InCopy, InDesign, Photoshop and Premier Pro.__
 
 ![][console]
 
-__Can be used without buttons__<br>
-![][consoleSmall]
+__Can be used without buttons__
 
+![][consoleSmall]
 
 * To execute line of code, press Enter.
 * To execute selected lines of code without inserting a line break, press Option (Mac) / Alt (Windows) + Enter.
@@ -59,6 +59,13 @@ In addition to the standard ExtendScript there are a few helper functions, these
 * `__doc()` returns the doc. Default current doc `__doc().name`
 * `__sel()` returns the current selection `__sel().width` is easier than `app.selection[0].width`
 
+### Change Log ###
+
+* Version 1.3 - 05 Mar 19
+    * Added buttons for changing console font size.
+    * Improved $.props function to show methods as well.
+    * Added $.props button to show properties and methods of selection.
+
 ### License ###
 
 * If you nick any snippets from the code please at least put a credit with a link to this page in your binary code.
@@ -70,5 +77,5 @@ In addition to the standard ExtendScript there are a few helper functions, these
 * Copyright Trevor [Creative Scripts](https://creative-scripts.com)
 
 
-[console]: ./Images/console_buttons.png
+[console]: ./Images/console_v1_3.png
 [consoleSmall]: ./Images/console_no_buttons.png
