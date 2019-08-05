@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="6.0"
-    ExtensionBundleId="com.creative-scripts.console"
-    ExtensionBundleVersion="1.4.1"
-    ExtensionBundleName="Extension-Name"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="6.0" ExtensionBundleId="com.creative-scripts.console" ExtensionBundleVersion="1.4.3" ExtensionBundleName="console" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Author>Trevor http://www.creative-scripts.com</Author>
     <Legal>Written under the do not complain do not sue license. DON'T FORGET TO PAY UP!</Legal>
     <Abstract>Console</Abstract>
     <ExtensionList>
-        <Extension Id="com.creative-scripts.console" Version="1.4.1" />
+        <Extension Id="com.creative-scripts.console" Version="1.4.3" />
     </ExtensionList>
     <ExecutionEnvironment>
         <HostList>
