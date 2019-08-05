@@ -150,6 +150,22 @@ var jsxLog = function(data) {
 if (window.__adobe_cep__) {
     var csInterface = new CSInterface();
     csInterface.addEventListener('com.creative-scripts.console.__log', jsxLog);
+
+    // Set PhotoShop, InDesign and InCopy persistence
+    (function() {
+        var persistenceString = '' + ({
+            PHXS: 'PhotoshopPersistent',
+            IDSN: 'com.adobe.InDesignPersistent',
+            AICY: 'com.adobe.InCopyPersistent'
+        }[csInterface.getApplicationID()]);
+        if (persistenceString === 'undefined') {return;}
+        var event;
+        event = new CSEvent(persistenceString, "APPLICATION");
+        event.extensionId = 'com.creative-scripts.cstk.2';
+        csInterface.dispatchEvent(event);
+        return persistenceString;
+    })(); //persistent to prevent extension from unloading
+    
 }
 
 
@@ -309,7 +325,7 @@ try {
             
             <div v-if="showInstructions" style="font-size: 8pt;text-align: left;margin-top: 5px;box-shadow: 0 0 2px;padding: 2px;">
                 <button @click="showInstructions = false" style="float:right;"><strong>X</strong></button>
-                <strong>Console</strong> Version 1.4 - 06 Mar 19.<br>
+                <strong>Console</strong> Version 1.4.1 - 05 Aug 19.<br>
                 <strong>Created by: Trevor <span 
                     style="color:#39f;text-decoration: underline;cursor: pointer;"
                     @click="exec('X http://www.creative-scripts.com '.replace(/X/, navigator.platform[0] === 'M' ? 'open' : 'start'));"
