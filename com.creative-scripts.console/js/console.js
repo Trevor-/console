@@ -161,7 +161,7 @@ if (window.__adobe_cep__) {
         if (persistenceString === 'undefined') {return;}
         var event;
         event = new CSEvent(persistenceString, "APPLICATION");
-        event.extensionId = 'com.creative-scripts.cstk.2';
+        event.extensionId = 'com.creative-scripts.console';
         csInterface.dispatchEvent(event);
         return persistenceString;
     })(); //persistent to prevent extension from unloading
