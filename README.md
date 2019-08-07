@@ -1,6 +1,6 @@
 # Console #
 #### JSX Console for Adobe apps. ####
-__CONSOLE Version 1.4.1 - 05 Aug 19__
+__CONSOLE Version 1.4.4 - 07 Aug 19__
 
 __Works in most Adobe Creative Cloud apps, including After Effects, Illustrator, InCopy, InDesign, Photoshop and Premier Pro.__
 
@@ -40,7 +40,7 @@ sudo ln -s "/Users/TREVOR/repositories/console/com.creative-scripts.console" "/L
 if not exist "C:\Users\TREVOR\repositories" md "C:\Users\TREVOR\repositories"
 cd "C:\Users\TREVOR\repositories"
 git clone https://github.com/Trevor-/console
-mklink /J  "C:\Program Files\Common Files\Adobe\CEP\extensions\com.creative-scripts.console"  "C:\Repositories\console\com.creative-scripts.console"
+mklink /D  "C:\Program Files\Common Files\Adobe\CEP\extensions\com.creative-scripts.console"  "C:\Repositories\console\com.creative-scripts.console"
 ```
 
 Replace **TREVOR** with your user name!
@@ -61,7 +61,7 @@ In addition to the standard ExtendScript there are a few helper functions, these
 
 ### Change Log ###
 
-* Version 1.4.1 - 05 Aug 19
+* Version 1.4.4 - 05 Aug 19
     * Added persistence for Photoshop, InDesign and InCopy so the extension doesn't restart on closing and reopening the panel.
 
 * Version 1.4 - 06 Mar 19
